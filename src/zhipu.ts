@@ -5,7 +5,6 @@ import { resolveEnvTemplate } from "./options.js";
 import { type SearchResultItem, parsePublishedTimestamp } from "./types.js";
 
 export const OFFICIAL_ZHIPU_URL = "https://open.bigmodel.cn/api/paas/v4/web_search";
-export const CODING_ZHIPU_URL = "https://open.bigmodel.cn/api/coding/paas/v4/web_search";
 
 type ZhipuSearchItem = {
   title?: string;
@@ -51,8 +50,7 @@ export async function zhipuSearch(
   config: PluginConfig["zhipu"],
   signal?: AbortSignal,
 ): Promise<readonly SearchResultItem[]> {
-  const url = config.coding ? CODING_ZHIPU_URL : OFFICIAL_ZHIPU_URL;
-  const json = await postJson<ZhipuApiResponse>(url, {
+  const json = await postJson<ZhipuApiResponse>(OFFICIAL_ZHIPU_URL, {
     headers: { Authorization: `Bearer ${apiKey}` },
     body: {
       search_query: query,

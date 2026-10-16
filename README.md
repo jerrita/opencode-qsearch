@@ -5,7 +5,7 @@ OpenCode V2 plugin that registers web search providers (`zhipu` and `brave`) int
 ## Features
 
 - Native OpenCode V2 websearch provider registration.
-- **Zhipu**: Official and Coding Plan endpoints, search engine selection (`search_std`, `search_pro`, etc.).
+- **Zhipu**: Official Web Search endpoint, search engine selection (`search_std`, `search_pro`, etc.).
 - **Brave Search**: Independent web search index, customizable safe search, language, country, and freshness filters.
 - Seamless authentication fallback: plugin options (`{env:...}` supported), environment variables, or `/connect` integrations.
 
@@ -38,8 +38,7 @@ Or configure provider-specific options:
         "zhipu": {
           "apiKey": "{env:ZHIPU_API_KEY}",
           "searchEngine": "search_std",
-          "count": 10,
-          "coding": false
+          "count": 10
         },
         "brave": {
           "apiKey": "{env:BRAVE_SEARCH_API_KEY}",
@@ -74,10 +73,9 @@ Or configure provider-specific options:
 | `provider` | `"zhipu" \| "brave"` | `undefined` | Sets default websearch provider if specified |
 | `zhipu.apiKey` | `string` | `undefined` | API key or `{env:VAR}` |
 | `zhipu.searchEngine` | `"search_std" \| "search_pro" \| "search_pro_sogou" \| "search_pro_quark"` | `"search_std"` | Zhipu search engine model |
-| `zhipu.count` | `number` (1-50) | `undefined` | Number of results |
-| `zhipu.coding` | `boolean` | `false` | Use Coding Plan endpoint |
+| `zhipu.count` | `number` (1-50) | `8` | Number of results |
 | `brave.apiKey` | `string` | `undefined` | Brave subscription token or `{env:VAR}` |
-| `brave.count` | `number` (1-20) | `undefined` | Number of results |
+| `brave.count` | `number` (1-20) | `8` | Number of results |
 | `brave.country` | `string` | `undefined` | 2-letter country code |
 | `brave.searchLang` | `string` | `undefined` | Language code |
 | `brave.safesearch` | `"off" \| "moderate" \| "strict"` | `undefined` | SafeSearch filter level |

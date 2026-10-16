@@ -7,7 +7,6 @@ const zhipuOptionsSchema = z
       .enum(["search_std", "search_pro", "search_pro_sogou", "search_pro_quark"])
       .optional(),
     count: z.number().int().min(1).max(50).optional(),
-    coding: z.boolean().optional(),
   })
   .strict();
 
@@ -35,12 +34,11 @@ export type PluginConfig = {
   zhipu: {
     apiKey?: string;
     searchEngine: "search_std" | "search_pro" | "search_pro_sogou" | "search_pro_quark";
-    count?: number;
-    coding: boolean;
+    count: number;
   };
   brave: {
     apiKey?: string;
-    count?: number;
+    count: number;
     country?: string;
     searchLang?: string;
     safesearch?: "off" | "moderate" | "strict";
@@ -55,12 +53,11 @@ export function parsePluginOptions(options: unknown): PluginConfig {
     zhipu: {
       apiKey: parsed.zhipu?.apiKey,
       searchEngine: parsed.zhipu?.searchEngine ?? "search_std",
-      count: parsed.zhipu?.count,
-      coding: parsed.zhipu?.coding ?? false,
+      count: parsed.zhipu?.count ?? 8,
     },
     brave: {
       apiKey: parsed.brave?.apiKey,
-      count: parsed.brave?.count,
+      count: parsed.brave?.count ?? 8,
       country: parsed.brave?.country,
       searchLang: parsed.brave?.searchLang,
       safesearch: parsed.brave?.safesearch,

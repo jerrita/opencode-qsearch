@@ -14,6 +14,7 @@ test("zhipuSearch maps API response items to SearchResultItem", async () => {
     const body = JSON.parse(String(init?.body));
     assert.equal(body.search_query, "OpenCode V2");
     assert.equal(body.search_engine, "search_std");
+    assert.equal(body.count, 8);
 
     return new Response(
       JSON.stringify({
@@ -37,7 +38,7 @@ test("zhipuSearch maps API response items to SearchResultItem", async () => {
   try {
     const results = await zhipuSearch("mock-zhipu-token", "OpenCode V2", {
       searchEngine: "search_std",
-      coding: false,
+      count: 8,
     });
 
     assert.equal(results.length, 1);

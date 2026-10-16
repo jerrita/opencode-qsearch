@@ -17,9 +17,8 @@ test("parsePluginOptions sets defaults correctly", () => {
   const options = parsePluginOptions({});
   assert.equal(options.provider, undefined);
   assert.equal(options.zhipu.searchEngine, "search_std");
-  assert.equal(options.zhipu.coding, false);
-  assert.equal(options.zhipu.count, undefined);
-  assert.equal(options.brave.count, undefined);
+  assert.equal(options.zhipu.count, 8);
+  assert.equal(options.brave.count, 8);
 });
 
 test("parsePluginOptions parses custom config", () => {
@@ -29,7 +28,6 @@ test("parsePluginOptions parses custom config", () => {
       apiKey: "z-key",
       searchEngine: "search_pro",
       count: 20,
-      coding: true,
     },
     brave: {
       apiKey: "b-key",
@@ -43,7 +41,6 @@ test("parsePluginOptions parses custom config", () => {
   assert.equal(options.zhipu.apiKey, "z-key");
   assert.equal(options.zhipu.searchEngine, "search_pro");
   assert.equal(options.zhipu.count, 20);
-  assert.equal(options.zhipu.coding, true);
   assert.equal(options.brave.apiKey, "b-key");
   assert.equal(options.brave.count, 5);
   assert.equal(options.brave.safesearch, "strict");

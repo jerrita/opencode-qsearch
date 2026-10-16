@@ -56,7 +56,7 @@ export async function braveSearch(
   url.searchParams.set("text_decorations", "false");
   url.searchParams.set("result_filter", "web");
 
-  if (config.count !== undefined) url.searchParams.set("count", String(config.count));
+  url.searchParams.set("count", String(config.count));
   if (config.country) url.searchParams.set("country", config.country);
   if (config.searchLang) url.searchParams.set("search_lang", config.searchLang);
   if (config.safesearch) url.searchParams.set("safesearch", config.safesearch);
