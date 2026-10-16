@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "opencode-qsearch",
+  "version": "0.1.0",
+  "description": "OpenCode V2 plugin for web search providers (Zhipu & Brave)",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "opencode",
+    "plugin",
+    "websearch",
+    "zhipu",
+    "brave"
+  ],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint ./src",
+    "format": "biome format --write ./src",
+    "check": "biome check --write ./src",
+    "test": "pnpm build && tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "@opencode/plugin": "2.0.30",
+    "zod": "4.1.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.0.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.23.12",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@9.15.9"
+}
