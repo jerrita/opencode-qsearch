@@ -3,6 +3,7 @@ import { postJson } from "./http.js";
 import type { PluginConfig } from "./options.js";
 import { resolveEnvTemplate } from "./options.js";
 import { type SearchResultItem, parsePublishedTimestamp } from "./types.js";
+import { zhipuMcpSearch } from "./zhipu-mcp.js";
 
 export const OFFICIAL_ZHIPU_URL = "https://open.bigmodel.cn/api/paas/v4/web_search";
 
@@ -50,6 +51,10 @@ export async function zhipuSearch(
   config: PluginConfig["zhipu"],
   signal?: AbortSignal,
 ): Promise<readonly SearchResultItem[]> {
+  if (config.searchEngine === "search_mcp") {
+    return zhipuMcpSearch(apiKey, query, config.count, signal);
+  }
+
   const json = await postJson<ZhipuApiResponse>(OFFICIAL_ZHIPU_URL, {
     headers: { Authorization: `Bearer ${apiKey}` },
     body: {

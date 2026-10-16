@@ -4,7 +4,7 @@ const zhipuOptionsSchema = z
   .object({
     apiKey: z.string().min(1).optional(),
     searchEngine: z
-      .enum(["search_std", "search_pro", "search_pro_sogou", "search_pro_quark"])
+      .enum(["search_std", "search_pro", "search_pro_sogou", "search_pro_quark", "search_mcp"])
       .optional(),
     count: z.number().int().min(1).max(50).optional(),
   })
@@ -33,7 +33,12 @@ export type PluginConfig = {
   provider?: "zhipu" | "brave";
   zhipu: {
     apiKey?: string;
-    searchEngine: "search_std" | "search_pro" | "search_pro_sogou" | "search_pro_quark";
+    searchEngine:
+      | "search_std"
+      | "search_pro"
+      | "search_pro_sogou"
+      | "search_pro_quark"
+      | "search_mcp";
     count: number;
   };
   brave: {

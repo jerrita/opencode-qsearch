@@ -47,6 +47,12 @@ test("parsePluginOptions parses custom config", () => {
   assert.equal(options.brave.country, "US");
 });
 
+test("parsePluginOptions accepts the Zhipu MCP backend", () => {
+  const options = parsePluginOptions({ zhipu: { searchEngine: "search_mcp" } });
+  assert.equal(options.zhipu.searchEngine, "search_mcp");
+  assert.equal(options.zhipu.count, 8);
+});
+
 test("parsePublishedTimestamp parses dates and rejects invalid values", () => {
   assert.equal(parsePublishedTimestamp(undefined), undefined);
   assert.equal(parsePublishedTimestamp(""), undefined);
