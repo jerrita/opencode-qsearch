@@ -5,14 +5,7 @@
   "description": "OpenCode V2 plugin for web search providers (Zhipu, Brave & DeepSeek)",
   "type": "module",
   "license": "MIT",
-  "keywords": [
-    "opencode",
-    "plugin",
-    "websearch",
-    "zhipu",
-    "brave",
-    "deepseek"
-  ],
+  "keywords": ["opencode", "plugin", "websearch", "zhipu", "brave", "deepseek"],
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,9 +15,7 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
