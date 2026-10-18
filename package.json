@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "opencode-qsearch",
-  "version": "2.1.0",
-  "description": "OpenCode V2 plugin for web search providers (Zhipu & Brave)",
+  "version": "2.2.0",
+  "description": "OpenCode V2 plugin for web search providers (Zhipu, Brave & DeepSeek)",
   "type": "module",
   "license": "MIT",
   "keywords": [
@@ -10,7 +10,8 @@
     "plugin",
     "websearch",
     "zhipu",
-    "brave"
+    "brave",
+    "deepseek"
   ],
   "sideEffects": false,
   "main": "./dist/index.js",

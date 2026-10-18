@@ -21,16 +21,26 @@ const braveOptionsSchema = z
   })
   .strict();
 
+const deepseekOptionsSchema = z
+  .object({
+    apiKey: z.string().min(1).optional(),
+    count: z.number().int().min(1).max(50).optional(),
+    localization: z.string().optional(),
+    needContent: z.boolean().optional(),
+  })
+  .strict();
+
 export const pluginOptionsSchema = z
   .object({
-    provider: z.enum(["zhipu", "brave"]).optional(),
+    provider: z.enum(["zhipu", "brave", "deepseek"]).optional(),
     zhipu: zhipuOptionsSchema.optional(),
     brave: braveOptionsSchema.optional(),
+    deepseek: deepseekOptionsSchema.optional(),
   })
   .strict();
 
 export type PluginConfig = {
-  provider?: "zhipu" | "brave";
+  provider?: "zhipu" | "brave" | "deepseek";
   zhipu: {
     apiKey?: string;
     searchEngine:
@@ -48,6 +58,12 @@ export type PluginConfig = {
     searchLang?: string;
     safesearch?: "off" | "moderate" | "strict";
     freshness?: string;
+  };
+  deepseek: {
+    apiKey?: string;
+    count: number;
+    localization?: string;
+    needContent: boolean;
   };
 };
 
@@ -67,6 +83,12 @@ export function parsePluginOptions(options: unknown): PluginConfig {
       searchLang: parsed.brave?.searchLang,
       safesearch: parsed.brave?.safesearch,
       freshness: parsed.brave?.freshness,
+    },
+    deepseek: {
+      apiKey: parsed.deepseek?.apiKey,
+      count: parsed.deepseek?.count ?? 8,
+      localization: parsed.deepseek?.localization,
+      needContent: parsed.deepseek?.needContent ?? false,
     },
   };
 }

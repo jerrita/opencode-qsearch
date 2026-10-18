@@ -1,5 +1,6 @@
 import { Plugin } from "@opencode/plugin";
 import { braveSearch, resolveBraveApiKey } from "./brave.js";
+import { deepseekSearch, resolveDeepSeekApiKey } from "./deepseek.js";
 import { parsePluginOptions } from "./options.js";
 import { resolveZhipuApiKey, zhipuSearch } from "./zhipu.js";
 
@@ -64,6 +65,17 @@ export default Plugin.define({
             resolveKeyFromIntegrations(ctx, ["brave"]),
           );
           return await braveSearch(apiKey, input.query, config.brave, context.signal);
+        },
+      });
+
+      editor.add({
+        id: "deepseek",
+        name: "DeepSeek",
+        execute: async (input, context) => {
+          const apiKey = await resolveDeepSeekApiKey(config.deepseek.apiKey, () =>
+            resolveKeyFromIntegrations(ctx, ["deepseek"]),
+          );
+          return await deepseekSearch(apiKey, input.query, config.deepseek, context.signal);
         },
       });
 

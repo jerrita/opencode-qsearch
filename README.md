@@ -1,12 +1,13 @@
 # opencode-qsearch
 
-OpenCode V2 plugin that registers web search providers (`zhipu` and `brave`) into OpenCode's native web search system via `ctx.websearch.transform`.
+OpenCode V2 plugin that registers web search providers (`zhipu`, `brave`, and `deepseek`) into OpenCode's native web search system via `ctx.websearch.transform`.
 
 ## Features
 
 - Native OpenCode V2 websearch provider registration.
 - **Zhipu**: Official Web Search endpoint with engine selection, or Coding Plan Search MCP via `search_mcp`.
 - **Brave Search**: Independent web search index, customizable safe search, language, country, and freshness filters.
+- **DeepSeek**: Official Search API with localized results and optional full page content.
 - Seamless authentication fallback: plugin options (`{env:...}` supported), environment variables, or `/connect` integrations.
 
 ## Installation
@@ -44,6 +45,11 @@ Or configure provider-specific options:
           "apiKey": "{env:BRAVE_SEARCH_API_KEY}",
           "count": 10,
           "safesearch": "moderate"
+        },
+        "deepseek": {
+          "apiKey": "{env:DEEPSEEK_API_KEY}",
+          "count": 10,
+          "needContent": false
         }
       }
     }
@@ -65,6 +71,14 @@ Or configure provider-specific options:
 1. `options.brave.apiKey` (supports `{env:VAR_NAME}`)
 2. `BRAVE_SEARCH_API_KEY` or `BRAVE_API_KEY` environment variable
 3. Connected `/connect` account for `brave`
+
+### DeepSeek
+1. `options.deepseek.apiKey` (supports `{env:VAR_NAME}`)
+2. `DEEPSEEK_API_KEY` environment variable
+3. Connected `/connect` account for `deepseek`
+
+Select it with `websearch.provider: "deepseek"` or `options.provider: "deepseek"`.
+Search results use page content when available, then the long summary, then the snippet.
 
 ## Zhipu Coding Plan Search MCP
 
@@ -93,7 +107,7 @@ cancellation. MCP failures are reported directly without falling back to the RES
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `provider` | `"zhipu" \| "brave"` | `undefined` | Sets default websearch provider if specified |
+| `provider` | `"zhipu" \| "brave" \| "deepseek"` | `undefined` | Sets default websearch provider if specified |
 | `zhipu.apiKey` | `string` | `undefined` | API key or `{env:VAR}` |
 | `zhipu.searchEngine` | `"search_std" \| "search_pro" \| "search_pro_sogou" \| "search_pro_quark" \| "search_mcp"` | `"search_std"` | Zhipu search engine or Coding Plan MCP backend |
 | `zhipu.count` | `number` (1-50) | `8` | Number of results; local upper limit for `search_mcp` |
@@ -103,3 +117,7 @@ cancellation. MCP failures are reported directly without falling back to the RES
 | `brave.searchLang` | `string` | `undefined` | Language code |
 | `brave.safesearch` | `"off" \| "moderate" \| "strict"` | `undefined` | SafeSearch filter level |
 | `brave.freshness` | `string` | `undefined` | Time filter (`pd`, `pw`, `pm`, `py`, or custom range) |
+| `deepseek.apiKey` | `string` | `undefined` | API key or `{env:VAR}` |
+| `deepseek.count` | `number` (1-50) | `8` | Number of results |
+| `deepseek.localization` | `string` | `undefined` | IP address used to prioritize localized results |
+| `deepseek.needContent` | `boolean` | `false` | Request full page content in addition to summaries |
